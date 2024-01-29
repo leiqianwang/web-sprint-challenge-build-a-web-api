@@ -14,7 +14,7 @@ function get(id) {
   let query = db("projects as p");
 
   if (id) {
-    query.where("p.id", id).first();
+    query.where("p.id", id).first(); // return the query
 
     const promises = [query, getProjectActions(id)]; // [ projects, actions ]
 

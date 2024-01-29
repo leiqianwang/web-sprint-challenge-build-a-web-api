@@ -24,7 +24,7 @@ router.get('/:id', Middleware.validateActionId, (req, res) => {
 });
 
 // [POST] /api/actions
-router.post('/', Middleware.validateProjectId, Middleware.validateActionData, async (req, res, next) => {
+router.post('/',  Middleware.validateActionData, async (req, res, next) => {
     try {
         const newAction = await Actions.insert(req.body); // Use insert() method from actions-model
         res.status(201).json(newAction);

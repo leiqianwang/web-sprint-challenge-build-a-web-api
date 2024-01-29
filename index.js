@@ -14,11 +14,11 @@ Pull your server into this file and start it!
 
 
 const server = require('./api/server'); // Import your server instance from server.js
-const morgan = require('morgan');
+//const morgan = require('morgan');
 
-const app = express();
+//const index = express();
 
-app.use(morgan('dev'));
+//index.use(morgan('dev'));
 const PORT = process.env.PORT || 9000;
 
 server.listen(PORT, () => {

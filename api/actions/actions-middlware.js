@@ -35,23 +35,23 @@ async function validateActionId(req, res, next) {
 }
 
 // Middleware function 3: Validate Project ID
-async function validateProjectId(req, res, next) {
-    const { project_id } = req.body;
+// async function validateProjectId(req, res, next) {
+//     const { project_id } = req.body;
 
-    try {
-        const project = await Projects.get(project_id);
-        if (project) {
-            next();
-        } else {
-            res.status(404).json({ message: 'Project not found' });
-        }
-    } catch (error) {
-        res.status(500).json({ message: 'Error validating project ID' });
-    }
-}
+//     try {
+//         const project = await Projects.get(project_id);
+//         if (project) {
+//             next();
+//         } else {
+//             res.status(404).json({ message: 'Project not found' });
+//         }
+//     } catch (error) {
+//         res.status(500).json({ message: 'Error validating project ID' });
+//     }
+// }
   
 module.exports = {
   validateActionData,
   validateActionId,
-  validateProjectId,
+  //validateProjectId,
 };
