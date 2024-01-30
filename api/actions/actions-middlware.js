@@ -21,7 +21,7 @@ async function validateActionId(req, res, next) {
     const { id } = req.params;
   
     try {
-        const action = await Actions.actionToBody(action);
+        const action = await Actions.get(id);
   
         if (action) {
             req.action = action; // Attach the action to the request object for later use
@@ -34,24 +34,20 @@ async function validateActionId(req, res, next) {
     }
 }
 
-// Middleware function 3: Validate Project ID
-// async function validateProjectId(req, res, next) {
-//     const { project_id } = req.body;
+function validateCompletedField(req, res, next) {
+    const { completed } = req.body;
 
-//     try {
-//         const project = await Projects.get(project_id);
-//         if (project) {
-//             next();
-//         } else {
-//             res.status(404).json({ message: 'Project not found' });
-//         }
-//     } catch (error) {
-//         res.status(500).json({ message: 'Error validating project ID' });
-//     }
-// }
+    if (completed === undefined) {
+        return res.status(400).json({ message: 'Missing required field: completed' });
+    }
+
+    next();
+}
+
+
   
 module.exports = {
   validateActionData,
   validateActionId,
-  //validateProjectId,
+validateCompletedField,
 };

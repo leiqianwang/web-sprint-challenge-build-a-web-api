@@ -7,7 +7,8 @@
 // // Define endpoints here
 const express = require('express');
 const Projects = require('./projects-model');
-const { validateProjectData, validateProjectId } = require('./projects-middleware');
+const { validateProjectData, validateProjectId, validateCompletedField } = require('./projects-middleware');
+
 const router = express.Router();
 
 // [GET] /api/projects - Get all projects
@@ -36,8 +37,9 @@ router.post('/', validateProjectData, async (req, res, next) => {
     }
 });
 
+
 // [PUT] /api/projects/:id - Update a project
-router.put('/:id', validateProjectId, validateProjectData, async (req, res, next) => {
+router.put('/:id', validateProjectData, validateCompletedField, validateProjectId, async (req, res, next) => {
     try {
         const updatedProject = await Projects.update(req.params.id, req.body);
         res.status(200).json(updatedProject);

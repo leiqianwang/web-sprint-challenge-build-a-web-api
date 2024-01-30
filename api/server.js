@@ -13,8 +13,8 @@ const server = express();
 // Use the routers with their respective base paths
 server.use(helmet());
 server.use(express.json());
-server.use('./api/projects', projectsRouter);
-server.use('./api/actions', actionsRouter);
+server.use('/api/projects', projectsRouter);
+server.use('/api/actions', actionsRouter);
 server.use('/', (req, res) => {
     res.send("hello");
 });

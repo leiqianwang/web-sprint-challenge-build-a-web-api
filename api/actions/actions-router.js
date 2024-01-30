@@ -23,6 +23,8 @@ router.get('/:id', Middleware.validateActionId, (req, res) => {
     res.status(200).json(req.action); // req.action is attached by the Middleware.validateActionId
 });
 
+
+
 // [POST] /api/actions
 router.post('/',  Middleware.validateActionData, async (req, res, next) => {
     try {
@@ -34,7 +36,7 @@ router.post('/',  Middleware.validateActionData, async (req, res, next) => {
 });
 
 // [PUT] /api/actions/:id
-router.put('/:id', Middleware.validateActionId, Middleware.validateActionData, async (req, res, next) => {
+router.put('/:id', Middleware.validateActionId, Middleware.validateCompletedField, Middleware.validateActionData, async (req, res, next) => {
     try {
         const updatedAction = await Actions.update(req.params.id, req.body);
         if (updatedAction) {
